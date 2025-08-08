@@ -8,10 +8,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "autoprefixer": "^10.4.21",
     "libsql": "^0.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.8.1"
+    "react-router-dom": "^6.8.1",
+    "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",
