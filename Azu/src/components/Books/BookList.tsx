@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Search, Filter, Grid, List, Heart, ShoppingCart, RefreshCw } from 'lucide-react';
 import { useBooks } from '../../context/BookContext';
 import { useAuth } from '../../context/AuthContext';
-import BookCard from './BookCard';
+import { BookCard } from './BookCard';
 import BookDetail from './BookDetail';
 
 const BookList: React.FC = () => {
