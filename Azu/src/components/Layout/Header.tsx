@@ -31,7 +31,7 @@ const Header: React.FC<HeaderProps> = ({ currentView, onViewChange }) => {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center space-x-8">
             <div 
-              className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent cursor-pointer"
+              className="text-2xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent cursor-pointer hover:scale-105 transition-transform"
               onClick={() => onViewChange('books')}
             >
               BookExchange
@@ -46,8 +46,8 @@ const Header: React.FC<HeaderProps> = ({ currentView, onViewChange }) => {
                     onClick={() => onViewChange(item.id)}
                     className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
                       currentView === item.id
-                        ? 'bg-blue-50 text-blue-600 shadow-sm'
-                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                        ? 'bg-gradient-to-r from-pink-50 to-purple-50 text-purple-600 shadow-sm border border-purple-200'
+                        : 'text-gray-600 hover:text-purple-700 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50'
                     }`}
                   >
                     <Icon size={18} />
@@ -63,7 +63,7 @@ const Header: React.FC<HeaderProps> = ({ currentView, onViewChange }) => {
               <>
                 <button
                   onClick={() => onViewChange('add-book')}
-                  className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all transform hover:-translate-y-0.5"
+                  className="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all transform hover:-translate-y-0.5 hover:scale-105"
                 >
                   Add Book
                 </button>
@@ -85,7 +85,7 @@ const Header: React.FC<HeaderProps> = ({ currentView, onViewChange }) => {
               <>
                 <button
                   onClick={() => setShowLoginModal(true)}
-                  className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 transition-colors"
+                  className="flex items-center space-x-2 text-gray-600 hover:text-purple-600 transition-colors"
                 >
                   <LogIn size={18} />
                   <span className="text-sm font-medium">Login</span>
@@ -93,7 +93,7 @@ const Header: React.FC<HeaderProps> = ({ currentView, onViewChange }) => {
                 
                 <button
                   onClick={() => setShowSignupModal(true)}
-                  className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all transform hover:-translate-y-0.5 flex items-center space-x-2"
+                  className="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all transform hover:-translate-y-0.5 hover:scale-105 flex items-center space-x-2"
                 >
                   <UserPlus size={18} />
                   <span>Sign Up</span>
@@ -115,8 +115,8 @@ const Header: React.FC<HeaderProps> = ({ currentView, onViewChange }) => {
                   onClick={() => onViewChange(item.id)}
                   className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap ${
                     currentView === item.id
-                      ? 'bg-blue-50 text-blue-600'
-                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                      ? 'bg-gradient-to-r from-pink-50 to-purple-50 text-purple-600 border border-purple-200'
+                      : 'text-gray-600 hover:text-purple-700 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50'
                   }`}
                 >
                   <Icon size={16} />

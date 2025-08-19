@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Upload, X, Plus } from 'lucide-react';
 import { useBooks } from '../../context/BookContext';
 import { useAuth } from '../../context/AuthContext';
+import { booksAPI } from '../../services/api';
 
 const AddBook: React.FC = () => {
   const { addBook } = useBooks();
-  const { user } = useAuth();
+  const { user, token } = useAuth();
   
   const [formData, setFormData] = useState({
     title: '',
@@ -94,16 +95,26 @@ const AddBook: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const bookData = {
+        title: formData.title,
+        author: formData.author,
+        isbn: formData.isbn,
+        genre: formData.genre,
+        condition: formData.condition.toUpperCase(),
+        price: formData.price,
+        description: formData.description,
+        publishedYear: formData.publishedYear,
+        language: formData.language,
+        pageCount: formData.pageCount,
+        forSale: formData.forSale,
+        forExchange: formData.forExchange,
+        images: ['https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg']
+      };
       
-      addBook({
-        ...formData,
-        images: ['https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg'], // Default placeholder
-        sellerId: user!.id,
-        sellerName: user!.username,
-        isAvailable: true
-      });
+      await booksAPI.createBook(bookData, token!);
+      
+      // Refresh the books list
+      addBook(bookData as any);
 
       // Reset form
       setFormData({
@@ -123,6 +134,7 @@ const AddBook: React.FC = () => {
 
       alert('Book added successfully!');
     } catch (error) {
+      console.error('Failed to add book:', error);
       setErrors({ general: 'Failed to add book. Please try again.' });
     } finally {
       setIsSubmitting(false);

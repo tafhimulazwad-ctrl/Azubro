@@ -48,10 +48,10 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSwitchToSign
 
         {/* Demo Credentials */}
         <div className="bg-blue-50 rounded-lg p-4 mb-6 text-sm">
-          <h3 className="font-semibold text-blue-800 mb-2">Demo Credentials:</h3>
-          <div className="space-y-1 text-blue-700">
-            <p><strong>Admin:</strong> admin@bookapp.com / admin123</p>
-            <p><strong>User:</strong> john@example.com / user123</p>
+          <h3 className="font-semibold text-purple-800 mb-2">Demo Credentials:</h3>
+          <div className="space-y-1 text-purple-700">
+            <p><strong>Admin:</strong> admin@bookexchange.com / password</p>
+            <p><strong>User:</strong> john@example.com / password</p>
           </div>
         </div>
 
@@ -68,7 +68,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSwitchToSign
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
                 placeholder="Enter your email"
                 required
               />
@@ -87,7 +87,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSwitchToSign
                 type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
                 placeholder="Enter your password"
                 required
               />
@@ -114,7 +114,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSwitchToSign
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg font-medium hover:shadow-lg transition-all transform hover:-translate-y-0.5 disabled:opacity-50 disabled:transform-none"
+            className="w-full bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white py-3 rounded-lg font-medium hover:shadow-lg transition-all transform hover:-translate-y-0.5 disabled:opacity-50 disabled:transform-none"
           >
             {loading ? 'Signing In...' : 'Sign In'}
           </button>
@@ -125,7 +125,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSwitchToSign
             Don't have an account?{' '}
             <button
               onClick={onSwitchToSignup}
-              className="text-blue-600 font-medium hover:underline"
+              className="text-purple-600 font-medium hover:underline"
             >
               Sign up
             </button>

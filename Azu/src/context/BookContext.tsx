@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Book, Review, ExchangeRequest, WishlistItem } from '../types';
+import { booksAPI, reviewsAPI, wishlistAPI, exchangeAPI } from '../services/api';
+import { useAuth } from './AuthContext';
 
 interface BookContextType {
   books: Book[];
@@ -35,95 +37,42 @@ export const BookProvider: React.FC<BookProviderProps> = ({ children }) => {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [exchangeRequests, setExchangeRequests] = useState<ExchangeRequest[]>([]);
   const [wishlist, setWishlist] = useState<WishlistItem[]>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Initialize with sample data
-    const sampleBooks: Book[] = [
-      {
-        id: '1',
-        title: 'The Great Gatsby',
-        author: 'F. Scott Fitzgerald',
-        isbn: '9780743273565',
-        genre: 'Classic Literature',
-        condition: 'good',
-        price: 12.99,
-        description: 'A classic American novel about the Jazz Age.',
-        images: ['https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg'],
-        sellerId: '2',
-        sellerName: 'johndoe',
-        isAvailable: true,
-        publishedYear: 1925,
-        language: 'English',
-        pageCount: 180,
-        createdAt: '2024-01-01',
-        forSale: true,
-        forExchange: true
-      },
-      {
-        id: '2',
-        title: 'To Kill a Mockingbird',
-        author: 'Harper Lee',
-        isbn: '9780060935467',
-        genre: 'Classic Literature',
-        condition: 'like-new',
-        price: 14.50,
-        description: 'A gripping tale of racial injustice and childhood innocence.',
-        images: ['https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg'],
-        sellerId: '1',
-        sellerName: 'admin',
-        isAvailable: true,
-        publishedYear: 1960,
-        language: 'English',
-        pageCount: 281,
-        createdAt: '2024-01-02',
-        forSale: true,
-        forExchange: false
-      },
-      {
-        id: '3',
-        title: '1984',
-        author: 'George Orwell',
-        isbn: '9780451524935',
-        genre: 'Science Fiction',
-        condition: 'good',
-        price: 11.25,
-        description: 'A dystopian social science fiction novel.',
-        images: ['https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg'],
-        sellerId: '2',
-        sellerName: 'johndoe',
-        isAvailable: true,
-        publishedYear: 1949,
-        language: 'English',
-        pageCount: 328,
-        createdAt: '2024-01-03',
-        forSale: false,
-        forExchange: true
-      }
-    ];
-
-    setBooks(sampleBooks);
+    loadBooks();
   }, []);
 
+  const loadBooks = async () => {
+    try {
+      setLoading(true);
+      const booksData = await booksAPI.getAllBooks();
+      setBooks(booksData);
+    } catch (error) {
+      console.error('Failed to load books:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const addBook = (bookData: Omit<Book, 'id' | 'createdAt'>) => {
-    const newBook: Book = {
-      ...bookData,
-      id: Date.now().toString(),
-      createdAt: new Date().toISOString().split('T')[0]
-    };
-    setBooks(prev => [...prev, newBook]);
+    // This will be handled by the AddBook component with API call
+    loadBooks(); // Refresh books after adding
   };
 
   const updateBook = (id: string, bookData: Partial<Book>) => {
-    setBooks(prev => prev.map(book => 
-      book.id === id ? { ...book, ...bookData } : book
-    ));
+    // This will be handled with API call
+    loadBooks(); // Refresh books after updating
   };
 
   const deleteBook = (id: string) => {
-    setBooks(prev => prev.filter(book => book.id !== id));
+    // This will be handled with API call
+    loadBooks(); // Refresh books after deleting
   };
 
   const addReview = (reviewData: Omit<Review, 'id' | 'createdAt'>) => {
+    // This will be handled with API call
+    // For now, add locally
     const newReview: Review = {
       ...reviewData,
       id: Date.now().toString(),
@@ -133,6 +82,7 @@ export const BookProvider: React.FC<BookProviderProps> = ({ children }) => {
   };
 
   const addToWishlist = (userId: string, bookId: string) => {
+    // This will be handled with API call
     const newWishlistItem: WishlistItem = {
       id: Date.now().toString(),
       userId,
@@ -143,12 +93,14 @@ export const BookProvider: React.FC<BookProviderProps> = ({ children }) => {
   };
 
   const removeFromWishlist = (userId: string, bookId: string) => {
+    // This will be handled with API call
     setWishlist(prev => prev.filter(item => 
       !(item.userId === userId && item.bookId === bookId)
     ));
   };
 
   const createExchangeRequest = (requestData: Omit<ExchangeRequest, 'id' | 'createdAt'>) => {
+    // This will be handled with API call
     const newRequest: ExchangeRequest = {
       ...requestData,
       id: Date.now().toString(),
@@ -158,6 +110,7 @@ export const BookProvider: React.FC<BookProviderProps> = ({ children }) => {
   };
 
   const updateExchangeRequest = (id: string, status: ExchangeRequest['status']) => {
+    // This will be handled with API call
     setExchangeRequests(prev => prev.map(req => 
       req.id === id ? { ...req, status } : req
     ));

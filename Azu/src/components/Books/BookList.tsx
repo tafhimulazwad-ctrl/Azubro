@@ -55,6 +55,7 @@ const BookList: React.FC = () => {
         
         {/* Search and Filters */}
         <div className="bg-white rounded-lg shadow-sm border p-6 mb-6">
+        <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-purple-100 p-6 mb-6">
           <div className="flex flex-col lg:flex-row gap-4">
             <div className="flex-1">
               <div className="relative">
@@ -65,7 +66,7 @@ const BookList: React.FC = () => {
                   type="text"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
                   placeholder="Search books by title or author..."
                 />
               </div>
@@ -75,7 +76,7 @@ const BookList: React.FC = () => {
               <select
                 value={selectedGenre}
                 onChange={(e) => setSelectedGenre(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="px-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               >
                 <option value="">All Genres</option>
                 {genres.map(genre => (
@@ -86,7 +87,7 @@ const BookList: React.FC = () => {
               <select
                 value={filterType}
                 onChange={(e) => setFilterType(e.target.value as any)}
-                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="px-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               >
                 <option value="all">All Books</option>
                 <option value="sale">For Sale</option>
@@ -96,13 +97,13 @@ const BookList: React.FC = () => {
               <div className="flex border border-gray-300 rounded-lg overflow-hidden">
                 <button
                   onClick={() => setViewMode('grid')}
-                  className={`px-3 py-2 ${viewMode === 'grid' ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-50'}`}
+                  className={`px-3 py-3 transition-all ${viewMode === 'grid' ? 'bg-gradient-to-r from-purple-50 to-pink-50 text-purple-600' : 'text-gray-600 hover:bg-purple-50'}`}
                 >
                   <Grid size={20} />
                 </button>
                 <button
                   onClick={() => setViewMode('list')}
-                  className={`px-3 py-2 ${viewMode === 'list' ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-50'}`}
+                  className={`px-3 py-3 transition-all ${viewMode === 'list' ? 'bg-gradient-to-r from-purple-50 to-pink-50 text-purple-600' : 'text-gray-600 hover:bg-purple-50'}`}
                 >
                   <List size={20} />
                 </button>
@@ -117,7 +118,7 @@ const BookList: React.FC = () => {
             Found {filteredBooks.length} book{filteredBooks.length !== 1 ? 's' : ''}
           </p>
           <div className="flex items-center space-x-2">
-            <Heart size={16} className="text-red-500" />
+            <Heart size={16} className="text-pink-500" />
             <span className="text-sm text-gray-600">Click heart to add to wishlist</span>
           </div>
         </div>
@@ -142,7 +143,7 @@ const BookList: React.FC = () => {
 
       {filteredBooks.length === 0 && (
         <div className="text-center py-12">
-          <div className="text-gray-400 mb-4">
+          <div className="text-purple-300 mb-4">
             <Search size={48} className="mx-auto" />
           </div>
           <h3 className="text-lg font-medium text-gray-900 mb-2">No books found</h3>
